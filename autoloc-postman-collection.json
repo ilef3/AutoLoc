@@ -1,0 +1,177 @@
+{
+  "info": {
+    "name": "AutoLoc API",
+    "description": "Tests CRUD simples pour Client et Vehicule",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Client",
+      "item": [
+        {
+          "name": "Add Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Ben Salah\",\n  \"prenom\": \"Ahmed\",\n  \"email\": \"ahmed.bensalah@email.com\",\n  \"telephone\": \"20123456\",\n  \"numPermis\": \"TN-123456\",\n  \"dateInscription\": \"2026-10-20\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/client/add-client",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["client", "add-client"]
+            }
+          }
+        },
+        {
+          "name": "Retrieve All Clients",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8081/client/retrieve-all-clients",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["client", "retrieve-all-clients"]
+            }
+          }
+        },
+        {
+          "name": "Retrieve Client by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8081/client/retrieve-client/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["client", "retrieve-client", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Client",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idClient\": 1,\n  \"nom\": \"Ben Salah\",\n  \"prenom\": \"Mohamed\",\n  \"email\": \"mohamed.bensalah@email.com\",\n  \"telephone\": \"20123456\",\n  \"numPermis\": \"TN-123456\",\n  \"dateInscription\": \"2026-10-20\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/client/modify-client",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["client", "modify-client"]
+            }
+          }
+        },
+        {
+          "name": "Remove Client",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8081/client/remove-client/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["client", "remove-client", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vehicule",
+      "item": [
+        {
+          "name": "Add Vehicule",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"immatriculation\": \"220-TN-5544\",\n  \"marque\": \"Volkswagen\",\n  \"modele\": \"Golf 8\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": 120.00,\n  \"statut\": \"DISPONIBLE\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/vehicule/add-vehicule",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["vehicule", "add-vehicule"]
+            }
+          }
+        },
+        {
+          "name": "Retrieve All Vehicules",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8081/vehicule/retrieve-all-vehicules",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["vehicule", "retrieve-all-vehicules"]
+            }
+          }
+        },
+        {
+          "name": "Retrieve Vehicule by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8081/vehicule/retrieve-vehicule/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["vehicule", "retrieve-vehicule", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Vehicule",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idVehicule\": 1,\n  \"immatriculation\": \"220-TN-5544\",\n  \"marque\": \"Volkswagen\",\n  \"modele\": \"Golf 8 GTI\",\n  \"categorie\": \"CITADINE\",\n  \"tarifJournalier\": 150.00,\n  \"statut\": \"DISPONIBLE\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8081/vehicule/modify-vehicule",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["vehicule", "modify-vehicule"]
+            }
+          }
+        },
+        {
+          "name": "Remove Vehicule",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "http://localhost:8081/vehicule/remove-vehicule/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8081",
+              "path": ["vehicule", "remove-vehicule", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

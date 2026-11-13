@@ -16,9 +16,11 @@ public class Agence {
     private String adresse;
     private String telephone;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "agence")
     private List<Vehicule> vehicules;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "agence")
     private List<Employe> employes;
 }

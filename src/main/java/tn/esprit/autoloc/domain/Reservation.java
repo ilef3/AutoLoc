@@ -23,6 +23,7 @@ public class Reservation {
     @ManyToOne
     private Vehicule vehicule;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToOne(mappedBy = "reservation")
     private Contrat contrat;
 }

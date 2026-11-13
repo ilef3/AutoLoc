@@ -13,6 +13,7 @@ public class Equipement {
 
     private String libelle;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @ManyToMany(mappedBy = "equipements")
     private List<Vehicule> vehicules;
 }

@@ -20,6 +20,7 @@ public class Contrat {
     @OneToOne
     private Reservation reservation;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL)
     private List<Paiement> paiements;
 }

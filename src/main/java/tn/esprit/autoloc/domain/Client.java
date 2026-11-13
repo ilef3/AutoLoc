@@ -19,6 +19,7 @@ public class Client {
     private String numPermis;
     private LocalDate dateInscription;
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Reservation> reservations;
 }
