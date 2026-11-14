@@ -21,6 +21,8 @@ public class VehiculeServiceImpl implements IVehiculeService {
     private final VehiculeRepository vehiculeRepository;
     private final AgenceRepository agenceRepository;
     private final EquipementRepository equipementRepository;
+    private final VehiculeValidator vehiculeValidator;
+    private final JournalisationService journalisationService;
 
     @Override
     public List<Vehicule> retrieveAllVehicules() {
@@ -35,6 +37,9 @@ public class VehiculeServiceImpl implements IVehiculeService {
 
     @Override
     public Vehicule addVehicule(Vehicule vehicule) {
+        // Application du principe SRP : délégation de la validation et du logging
+        vehiculeValidator.valider(vehicule);
+        journalisationService.logAction("Ajout d'un nouveau véhicule : " + vehicule.getImmatriculation() + " (" + vehicule.getMarque() + " " + vehicule.getModele() + ")");
         return vehiculeRepository.save(vehicule);
     }
 

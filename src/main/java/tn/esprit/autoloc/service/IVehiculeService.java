@@ -7,6 +7,9 @@ public interface IVehiculeService {
     List<Vehicule> retrieveAllVehicules();
     Vehicule retrieveVehicule(Long idVehicule);
     Vehicule addVehicule(Vehicule vehicule);
+    default Vehicule ajouter(Vehicule vehicule) {
+        return addVehicule(vehicule);
+    }
     Vehicule updateVehicule(Vehicule vehicule);
     void removeVehicule(Long idVehicule);
     Vehicule affecterVehiculeAAgence(Long idVehicule, Long idAgence);
