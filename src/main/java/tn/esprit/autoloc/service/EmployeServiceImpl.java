@@ -54,9 +54,29 @@ public class EmployeServiceImpl implements IEmployeService {
     @Override
     @Transactional
     public Employe affecterEmployeAAgence(Long idEmploye, Long idAgence) {
+        return affecterEmploye(idEmploye, idAgence);
+    }
+
+    @Override
+    @Transactional
+    public Employe desaffecterEmploye(Long idEmploye) {
         Employe employe = retrieveEmploye(idEmploye);
+        employe.setAgence(null);
+        return employeRepository.save(employe);
+    }
+
+    @Override
+    @Transactional
+    public Employe affecterEmploye(Long idEmploye, Long idAgence) {
+        Employe employe = retrieveEmploye(idEmploye);
+        // Scénario 1 : Un employé ne peut appartenir qu’à une seule agence à la fois,
+        // donc un transfert passe d’abord par une désaffectation
+        if (employe.getAgence() != null) {
+            employe.setAgence(null);
+        }
         Agence agence = agenceRepository.findById(idAgence)
                 .orElseThrow(() -> new RuntimeException("Agence introuvable avec l'identifiant : " + idAgence));
+        // Côté propriétaire de la relation (@ManyToOne dans Employe)
         employe.setAgence(agence);
         return employeRepository.save(employe);
     }

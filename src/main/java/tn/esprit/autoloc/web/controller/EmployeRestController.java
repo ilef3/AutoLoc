@@ -52,12 +52,19 @@ public class EmployeRestController {
         employeService.removeEmploye(employeId);
     }
 
-    // http://localhost:8081/employe/affecter-employe-agence/1/2
-    @Operation(description = "Affecter un employé à une agence")
-    @PutMapping("/affecter-employe-agence/{employe-id}/{agence-id}")
-    public Employe affecterEmployeAAgence(@PathVariable("employe-id") Long employeId,
-                                          @PathVariable("agence-id") Long agenceId) {
-        return employeService.affecterEmployeAAgence(employeId, agenceId);
+    // http://localhost:8081/employe/affecter-employe/1/2
+    @Operation(description = "Affecter un employé à une agence (Scénario RH : mutation avec désaffectation préalable)")
+    @PutMapping({"/affecter-employe/{employe-id}/{agence-id}", "/affecter-employe-agence/{employe-id}/{agence-id}"})
+    public Employe affecterEmploye(@PathVariable("employe-id") Long employeId,
+                                   @PathVariable("agence-id") Long agenceId) {
+        return employeService.affecterEmploye(employeId, agenceId);
+    }
+
+    // http://localhost:8081/employe/desaffecter-employe/1
+    @Operation(description = "Désaffecter un employé de son agence")
+    @PutMapping("/desaffecter-employe/{employe-id}")
+    public Employe desaffecterEmploye(@PathVariable("employe-id") Long employeId) {
+        return employeService.desaffecterEmploye(employeId);
     }
 }
 

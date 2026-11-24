@@ -62,9 +62,16 @@ public class VehiculeServiceImpl implements IVehiculeService {
     @Override
     @Transactional
     public Vehicule affecterVehiculeAAgence(Long idVehicule, Long idAgence) {
+        return affecterVehicule(idVehicule, idAgence);
+    }
+
+    @Override
+    @Transactional
+    public Vehicule affecterVehicule(Long idVehicule, Long idAgence) {
         Vehicule vehicule = retrieveVehicule(idVehicule);
         Agence agence = agenceRepository.findById(idAgence)
                 .orElseThrow(() -> new RuntimeException("Agence introuvable avec l'identifiant : " + idAgence));
+        // Règle JPA : Côté propriétaire de la relation (@ManyToOne dans Vehicule)
         vehicule.setAgence(agence);
         return vehiculeRepository.save(vehicule);
     }
@@ -75,6 +82,35 @@ public class VehiculeServiceImpl implements IVehiculeService {
         Vehicule vehicule = retrieveVehicule(idVehicule);
         List<Equipement> equipements = equipementRepository.findAllById(idEquipements);
         vehicule.setEquipements(equipements);
+        return vehiculeRepository.save(vehicule);
+    }
+
+    @Override
+    @Transactional
+    public Vehicule affecterEquipement(Long idVehicule, Long idEquipement) {
+        Vehicule vehicule = retrieveVehicule(idVehicule);
+        Equipement equipement = equipementRepository.findById(idEquipement)
+                .orElseThrow(() -> new RuntimeException("Equipement introuvable avec l'identifiant : " + idEquipement));
+        // Règle JPA ManyToMany : côté parent choisi (Vehicule)
+        if (vehicule.getEquipements() == null) {
+            vehicule.setEquipements(new java.util.ArrayList<>());
+        }
+        if (!vehicule.getEquipements().contains(equipement)) {
+            vehicule.getEquipements().add(equipement);
+        }
+        return vehiculeRepository.save(vehicule);
+    }
+
+    @Override
+    @Transactional
+    public Vehicule desaffecterEquipement(Long idVehicule, Long idEquipement) {
+        Vehicule vehicule = retrieveVehicule(idVehicule);
+        Equipement equipement = equipementRepository.findById(idEquipement)
+                .orElseThrow(() -> new RuntimeException("Equipement introuvable avec l'identifiant : " + idEquipement));
+        // Règle JPA Désaffectation ManyToMany : enlever l'élément de la liste du parent
+        if (vehicule.getEquipements() != null) {
+            vehicule.getEquipements().remove(equipement);
+        }
         return vehiculeRepository.save(vehicule);
     }
 }
